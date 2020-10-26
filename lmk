@@ -1,0 +1,16 @@
+#!/bin/bash
+
+# Run the command
+$@
+exitCode=$?
+
+# Craft response based on output
+if [[ "$exitCode" == "0" ]]; then
+  title="Command succeeded"
+else
+  title="Command failed with exit code $exitCode"
+fi
+
+terminal-notifier -title "$title" -message "$@"
+
+exit $exitCode
